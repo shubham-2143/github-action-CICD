@@ -5,10 +5,7 @@ resource "aws_instance" "name" {
     Name = "devv"
   }
 }
-terraform {
-  backend "s3" {
-    bucket = "shubhamsontakke"
-  }
+resource "aws_s3_bucket" "name" {
+  bucket = "shubhamsontakke"
 }
-
 
