@@ -4,8 +4,8 @@ name: Terraform Deploy
 on:
    #push:
      #branches: [ main ]
-      workflow_dispatch:   # ✅ Manual trigger only
-     inputs:
+   workflow_dispatch:   # ✅ Manual trigger only
+    inputs:
       action:
         description: "Select Terraform step"
         required: true
