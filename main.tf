@@ -5,7 +5,5 @@ resource "aws_instance" "name" {
     Name = "devv"
   }
 }
-resource "aws_s3_bucket" "name" {
-  bucket = "shubhamsontakke"
-}
+
 
