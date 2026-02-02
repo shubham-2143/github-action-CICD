@@ -2,8 +2,20 @@
 name: Terraform Deploy
 
 on:
-   push:
-     branches: [ main ]
+   #push:
+     #branches: [ main ]
+      workflow_dispatch:   # ✅ Manual trigger only
+     inputs:
+      action:
+        description: "Select Terraform step"
+        required: true
+        default: "plan"
+        type: choice
+        options:
+          - init
+          - validate
+          - plan
+          - apply
  
 
 jobs:
@@ -23,19 +35,19 @@ jobs:
         uses: hashicorp/setup-terraform@v3
 
       - name: Terraform Init
-        #if: ${{ github.event.inputs.action == 'init' }}
+        if: ${{ github.event.inputs.action == 'init' }}
         run: terraform init
 
       - name: Terraform Validate
-        #if: ${{ github.event.inputs.action == 'validate' }}
+        if: ${{ github.event.inputs.action == 'validate' }}
         run: terraform validate
 
       - name: Terraform Plan
-        #if: ${{ github.event.inputs.action == 'plan' }}
+        if: ${{ github.event.inputs.action == 'plan' }}
         run: terraform plan -out=tfplan
 
       - name: Terraform Apply
-        #if: ${{ github.event.inputs.action == 'apply' }}
+        if: ${{ github.event.inputs.action == 'apply' }}
         run: terraform apply -auto-approve "tfplan"
 
          
